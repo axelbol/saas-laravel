@@ -72,6 +72,10 @@ class TalkController extends Controller
      */
     public function destroy(Talk $talk)
     {
-        //
+        if ($talk->user_id === Auth::user()->id) {
+            $talk->delete();
+        }
+
+        return redirect()->route('talks.index');
     }
 }

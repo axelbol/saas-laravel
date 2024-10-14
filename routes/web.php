@@ -18,9 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // talks
     Route::get('talks', [TalkController::class, 'index'])->name('talks.index');
-    Route::get('talks/{talk}', [TalkController::class, 'show'])->name('talks.show');
     Route::get('talks/create', [TalkController::class, 'create'])->name('talks.create');
+    Route::get('talks/{talk}', [TalkController::class, 'show'])->name('talks.show');
     Route::post('talks', [TalkController::class, 'store'])->name('talks.store');
+    Route::delete('talks/{talk}', [TalkController::class, 'destroy'])->name('talks.destroy');
 });
 
 require __DIR__ . '/auth.php';

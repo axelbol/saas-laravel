@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
 
-                    @include('talks.template')
+                    {{-- @include('talks.template') --}}
                 </div>
             </div>
         </div>
