@@ -21,16 +21,23 @@
                     name="type"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 >
-                    <option>Lightning</option>
-                    <option>Standard</option>
-                    <option>Keynote</option>
+                    @foreach (App\Enums\TalkType::cases() as $talkType)
+                        <option
+                            {{ old('type') === $talkType->value ? 'selected' : '' }}
+                            value="{{ $talkType->value }}"
+                        >
+                            {{ ucwords($talkType->value) }}
+                        </option>
+                    @endforeach
                 </select>
+                <x-input-error :messages="$errors->get('type')" />
             </div>
             <div>
                 <label for="length" class="block text-sm font-medium text-gray-700">Length</label>
                 <input
                     type="text"
                     id="length"
+                    value="{{ old('length') }}"
                     name="length"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
@@ -46,7 +53,9 @@
                 name="abstract"
                 rows="4"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            ></textarea>
+            >
+{{ old('abstract') }}</textarea
+            >
             <p class="mt-1 text-sm text-gray-500">
                 Describe the talk in a few sentences, in a way that's compelling and informative and could be presented
                 to the public.
@@ -61,7 +70,9 @@
                 name="organizer_notes"
                 rows="4"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            ></textarea>
+            >
+{{ old('organizer_notes') }}</textarea
+            >
             <p class="mt-1 text-sm text-gray-500">
                 Write any notes you may want to pass to an event organizer about this talk.
             </p>
