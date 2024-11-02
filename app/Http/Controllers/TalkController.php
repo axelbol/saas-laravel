@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TalkType;
+use App\Http\Requests\UpdateTalkRequest;
 use App\Models\Talk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,21 +69,16 @@ class TalkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Talk $talk)
+    public function update(UpdateTalkRequest $request, Talk $talk)
     {
-        if ($talk->author->id != Auth::user()->id) {
-            abort(403);
-        }
+        // code move to UpdateTalkRequest
+        // if ($talk->author->id != Auth::user()->id) {
+        //     abort(403);
+        // }
 
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'length' => '',
-            'type' => ['required', Rule::enum(TalkType::class)],
-            'abstract' => '',
-            'organizer_notes' => '',
-        ]);
+        // $validated = $request->validate();
 
-        $talk->update($validated);
+        $talk->update($request->validated());
 
         return redirect()->route('talks.show', ['talk' => $talk]);
         // dd($request, $talk);
